@@ -9,7 +9,7 @@ image:
   # -- Docker registry/repository to pull the image from
   repository: ghcr.io/blakeblackshear/frigate
   # -- Overrides the default tag (appVersion) used in Chart.yaml ([Docker Hub](https://hub.docker.com/r/blakeblackshear/frigate/tags?page=1))
-  tag:
+  tag: "0.16.4"
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
 
@@ -60,6 +60,8 @@ fullnameOverride: ""
 
 # -- frigate configuration - see [Docs](https://docs.frigate.video/configuration/index) for more info
 config: |
+  # See https://docs.frigate.video/configuration/
+  # Required: MQTT configuration
   mqtt:
     # Required: host name
     host: mqtt.server.com
@@ -80,13 +82,53 @@ config: |
     # Optional: interval in seconds for publishing stats (default: shown below)
     stats_interval: 60
 
-  detectors:
-    # coral:
-    #   type: edgetpu
-    #   device: usb
-    cpu1:
-      type: cpu
+  # Optional: advanced features
+  # see https://docs.frigate.video/configuration/advanced
+  advanced:
+    # Optional: face recognition configuration
+    face_recognition:
+      enabled: false
+      # Optional: path to the folder with known faces
+      known_faces_path: /config/known_faces
+    # Optional: license plate recognition configuration
+    lpr:
+      enabled: false
+      # Optional: path to the folder with known license plates
+      known_plates_path: /config/known_plates
+    # Optional: semantic search configuration
+    semantic_search:
+      enabled: false
+    # Optional: generative AI configuration
+    genai:
+      enabled: false
 
+  # Required: detector configuration
+  # see https://docs.frigate.video/configuration/detectors
+  detectors:
+    # Required: name of the detector
+    main:
+      # Required: detector type
+      type: cpu
+      # Optional: number of detection threads
+      num_threads: 3
+
+  # Optional: user configuration
+  # see https://docs.frigate.video/configuration/users
+  users:
+    # Required: at least one user must be defined
+    admin:
+      # Required: user's password
+      password: "password"
+      # Required: user's roles
+      roles:
+        - admin
+    viewer:
+      password: "password"
+      roles:
+        - viewer
+
+  # Optional: camera configuration
+  # see https://docs.frigate.video/configuration/cameras
   # cameras:
   #   # Name of your camera
   #   front_door:
