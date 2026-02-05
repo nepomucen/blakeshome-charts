@@ -59,7 +59,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 # -- frigate configuration - see [Docs](https://docs.frigate.video/configuration/index) for more info
-config: |
+config:
   # See https://docs.frigate.video/configuration/
   # Required: MQTT configuration
   mqtt:
@@ -82,50 +82,15 @@ config: |
     # Optional: interval in seconds for publishing stats (default: shown below)
     stats_interval: 60
 
-  # Optional: advanced features
-  # see https://docs.frigate.video/configuration/advanced
-  advanced:
-    # Optional: face recognition configuration
-    face_recognition:
-      enabled: false
-      # Optional: path to the folder with known faces
-      known_faces_path: /config/known_faces
-    # Optional: license plate recognition configuration
-    lpr:
-      enabled: false
-      # Optional: path to the folder with known license plates
-      known_plates_path: /config/known_plates
-    # Optional: semantic search configuration
-    semantic_search:
-      enabled: false
-    # Optional: generative AI configuration
-    genai:
-      enabled: false
-
-  # Required: detector configuration
+  # Optional: detector configuration
   # see https://docs.frigate.video/configuration/detectors
   detectors:
     # Required: name of the detector
-    main:
+    cpu1:
       # Required: detector type
       type: cpu
       # Optional: number of detection threads
       num_threads: 3
-
-  # Optional: user configuration
-  # see https://docs.frigate.video/configuration/users
-  users:
-    # Required: at least one user must be defined
-    admin:
-      # Required: user's password
-      password: "password"
-      # Required: user's roles
-      roles:
-        - admin
-    viewer:
-      password: "password"
-      roles:
-        - viewer
 
   # Optional: camera configuration
   # see https://docs.frigate.video/configuration/cameras
@@ -137,10 +102,10 @@ config: |
   #         - path: rtsp://{FRIGATE_RSTP_USERNAME}:{FRIGATE_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
   #           roles:
   #             - detect
-  #             - rtmp
-  #     width: 1280
-  #     height: 720
-  #     fps: 5
+  #     detect:
+  #       width: 1280
+  #       height: 720
+  #       fps: 5
 
 # Probes configuration
 probes:
