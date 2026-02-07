@@ -5,6 +5,9 @@
 # -- upgrade strategy type (e.g. Recreate or RollingUpdate)
 strategyType: Recreate
 
+# -- terminationGracePeriodSeconds for the pod
+terminationGracePeriodSeconds: 30
+
 image:
   # -- Docker registry/repository to pull the image from
   repository: ghcr.io/blakeblackshear/frigate

@@ -26,6 +26,9 @@ spec:
         {{- end }}
       {{- end }}
     spec:
+      {{- if .Values.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      {{- end }}
       {{- if and .Values.gpu.nvidia.enabled (.Values.gpu.nvidia.runtimeClassName) }}
       runtimeClassName: {{ .Values.gpu.nvidia.runtimeClassName }}
       {{- end }}
