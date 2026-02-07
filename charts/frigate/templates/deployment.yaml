@@ -148,8 +148,6 @@ spec:
             {{- end }}
             - mountPath: /config
               name: config
-            - mountPath: /data
-              name: data
             - mountPath: /media
               name: media
             - name: dshm
@@ -174,13 +172,6 @@ spec:
         {{- if .Values.persistence.config.enabled }}
           persistentVolumeClaim:
             claimName: {{ if .Values.persistence.config.existingClaim }}{{ .Values.persistence.config.existingClaim }}{{- else }}{{ template "frigate.fullname" . }}-config{{- end }}
-        {{- else }}
-          emptyDir: {}
-        {{- end }}
-        - name: data
-        {{- if .Values.persistence.data.enabled }}
-          persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.data.existingClaim }}{{ .Values.persistence.data.existingClaim }}{{- else }}{{ template "frigate.fullname" . }}-data{{- end }}
         {{- else }}
           emptyDir: {}
         {{- end }}

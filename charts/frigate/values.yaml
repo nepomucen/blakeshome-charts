@@ -186,13 +186,6 @@ ingress:
   #      - chart-example.local
 
 persistence:
-  data:
-    # Data directory is obsolete. Use config and media instead.
-    enabled: false
-    accessMode: ReadWriteOnce
-    size: 10Gi
-    skipuninstall: false
-
   config:
     # -- Enables persistence for the config directory
     enabled: false
